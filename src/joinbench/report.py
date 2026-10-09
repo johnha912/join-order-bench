@@ -163,10 +163,8 @@ PAGE = """<!doctype html>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Join Order Bench</title>
 <style>
-:root {{ --bg:#f9f9f7; --surface:#fcfcfb; --ink:#0b0b0b; --ink2:#52514e; --line:#e1e0d9; }}
-@media (prefers-color-scheme: dark) {{ :root:not([data-theme="light"]) {{
-  --bg:#0d0d0d; --surface:#1a1a19; --ink:#ffffff; --ink2:#c3c2b7; --line:#2c2c2a; }} }}
-:root[data-theme="dark"] {{ --bg:#0d0d0d; --surface:#1a1a19; --ink:#ffffff; --ink2:#c3c2b7; --line:#2c2c2a; }}
+:root {{ color-scheme:light; --bg:#f9f9f7; --surface:#fcfcfb; --ink:#0b0b0b; --ink2:#52514e;
+  --line:#e1e0d9; }}
 body {{ margin:0; background:var(--bg); color:var(--ink); font:16px/1.5 system-ui,"Segoe UI",sans-serif; }}
 main {{ max-width:1200px; margin:0 auto; padding:32px 16px; }}
 h1 {{ margin:0 0 4px; font-size:28px; }} h2 {{ margin:40px 0 4px; font-size:20px; }}
@@ -205,16 +203,6 @@ the model ranks join orders the way the stopwatch does.</p>
 filters. Points off the diagonal are where that assumption breaks.</p>
 <section>{cards}</section>
 </main>
-<script>
-const dark = matchMedia("(prefers-color-scheme: dark)").matches
-  && document.documentElement.dataset.theme !== "light"
-  || document.documentElement.dataset.theme === "dark";
-if (dark) document.querySelectorAll(".plotly-graph-div").forEach(el => Plotly.relayout(el, {{
-  "font.color": "#c3c2b7",
-  ...Object.fromEntries(Object.keys(el.layout).filter(k => /^[xy]axis/.test(k))
-    .flatMap(k => [[k + ".gridcolor", "#2c2c2a"], [k + ".linecolor", "#383835"]])),
-}}));
-</script>
 </body></html>
 """
 

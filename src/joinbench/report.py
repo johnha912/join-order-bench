@@ -56,8 +56,38 @@ def kpi_table(plans):
         cells = (engine, chain, len(forced), f"{rs[0]['rows']:,.0f}", ms(best),
                  *(f"{s / best:,.2f}×" for s in (*t.values(), worst)))
         body.append("<tr>" + "".join(f"<td>{html.escape(str(c))}</td>" for c in cells) + "</tr>")
-    th = "".join(f"<th>{h}</th>" for h in head)
-    return f"<table><thead><tr>{th}</tr></thead><tbody>{''.join(body)}</tbody></table>"
+    th = "".join(f'<th aria-sort="none"><button type="button">{h}</button></th>' for h in head)
+    filters = "".join(
+        f'<label>{name} <select data-col="{col}"><option value="">All</option>'
+        + "".join(f"<option>{html.escape(v)}</option>" for v in dict.fromkeys(k[col] for k in groups))
+        + "</select></label>"
+        for col, name in enumerate(("Engine", "Chain"))
+    )
+    return (f'<div id="summary-filters">{filters}</div>'
+            f'<table id="summary"><thead><tr>{th}</tr></thead><tbody>{"".join(body)}</tbody></table>')
+
+
+# Filter by engine/chain and sort by any column, numbers compared as numbers.
+SCRIPT = """<script>
+const table = document.getElementById("summary");
+const rows = [...table.tBodies[0].rows];
+const filters = [...document.querySelectorAll("#summary-filters select")];
+filters.forEach(s => s.addEventListener("change", () => rows.forEach(r => {
+  r.hidden = filters.some(f => f.value && r.cells[f.dataset.col].textContent !== f.value);
+})));
+const key = t => { const n = parseFloat(t.replace(/[,×]/g, "")); return isNaN(n) ? t : n; };
+table.querySelectorAll("th button").forEach((b, i) => b.addEventListener("click", () => {
+  const th = b.parentElement;
+  const dir = th.getAttribute("aria-sort") === "ascending" ? -1 : 1;
+  table.querySelectorAll("th").forEach(h => h.setAttribute("aria-sort", "none"));
+  th.setAttribute("aria-sort", dir > 0 ? "ascending" : "descending");
+  rows.sort((p, q) => {
+    const x = key(p.cells[i].textContent), y = key(q.cells[i].textContent);
+    return (x > y ? 1 : x < y ? -1 : 0) * dir;
+  });
+  table.tBodies[0].append(...rows);
+}));
+</script>"""
 
 
 def style(fig, height):
@@ -175,6 +205,14 @@ table {{ border-collapse:collapse; width:100%; font-size:14px; font-variant-nume
 th, td {{ padding:6px 10px; border-bottom:1px solid var(--line); text-align:right; white-space:nowrap; }}
 th:nth-child(-n+2), td:nth-child(-n+2) {{ text-align:left; }}
 th {{ color:var(--ink2); font-weight:600; }}
+th button {{ all:unset; cursor:pointer; }}
+th button:focus-visible {{ outline:2px solid #2a78d6; outline-offset:2px; }}
+th button::after {{ content:" ↕"; color:#c3c2b7; }}
+th[aria-sort="ascending"] button::after {{ content:" ▲"; color:var(--ink); }}
+th[aria-sort="descending"] button::after {{ content:" ▼"; color:var(--ink); }}
+#summary-filters {{ display:flex; flex-wrap:wrap; gap:16px; margin-bottom:12px; font-size:14px; }}
+#summary-filters select {{ font:inherit; padding:6px 8px; min-height:36px; border:1px solid var(--line);
+  border-radius:8px; background:#fff; color:var(--ink); }}
 a {{ color:#2a78d6; }}
 </style></head><body><main>
 <h1>Join Order Bench</h1>
@@ -203,6 +241,7 @@ the model ranks join orders the way the stopwatch does.</p>
 filters. Points off the diagonal are where that assumption breaks.</p>
 <section>{cards}</section>
 </main>
+{script}
 </body></html>
 """
 
@@ -216,4 +255,5 @@ def build(plans_csv, cards_csv, out):
     engines = " and ".join(dict.fromkeys(r["engine"] for r in plans))
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(PAGE.format(sf=f"SF {float(plans[0]['sf']):g}", engines=engines, table=kpi_table(plans),
-                               spread=parts[0], model=parts[1], cards=parts[2]), encoding="utf-8")
+                               spread=parts[0], model=parts[1], cards=parts[2], script=SCRIPT),
+                   encoding="utf-8")

@@ -1,0 +1,159 @@
+sf,engine,chain,plan,model_cost,seconds,rows,is_dp,is_greedy,is_left_to_right
+1.0,duckdb,brass_parts_europe_1995,(P |x| (L |x| (O |x| (C |x| (N |x| R))))),295319,0.0420911000110209,36765,True,True,False
+1.0,duckdb,brass_parts_europe_1995,(P |x| (L |x| (O |x| ((C |x| N) |x| R)))),445314,0.03510400000959635,36765,False,False,False
+1.0,duckdb,brass_parts_europe_1995,(P |x| (L |x| ((O |x| C) |x| (N |x| R)))),493956,0.03152820002287626,36765,False,False,False
+1.0,duckdb,brass_parts_europe_1995,(P |x| (L |x| ((O |x| (C |x| N)) |x| R))),643951,0.032386799925006926,36765,False,False,False
+1.0,duckdb,brass_parts_europe_1995,(P |x| (L |x| (((O |x| C) |x| N) |x| R))),722588,0.03195090009830892,36765,False,False,False
+1.0,duckdb,brass_parts_europe_1995,(P |x| ((L |x| O) |x| (C |x| (N |x| R)))),1164327,0.04127340007107705,36765,False,False,False
+1.0,duckdb,brass_parts_europe_1995,(P |x| ((L |x| O) |x| ((C |x| N) |x| R))),1314322,0.04162729997187853,36765,False,False,False
+1.0,duckdb,brass_parts_europe_1995,(P |x| ((L |x| (O |x| C)) |x| (N |x| R))),1362964,0.0435231999726966,36765,False,False,False
+1.0,duckdb,brass_parts_europe_1995,(P |x| (((L |x| O) |x| C) |x| (N |x| R))),2049060,0.039395199972204864,36765,False,False,False
+1.0,duckdb,brass_parts_europe_1995,(P |x| ((L |x| (O |x| (C |x| N))) |x| R)),1512959,0.046052200021222234,36765,False,False,False
+1.0,duckdb,brass_parts_europe_1995,(P |x| ((L |x| ((O |x| C) |x| N)) |x| R)),1591596,0.04600219998974353,36765,False,False,False
+1.0,duckdb,brass_parts_europe_1995,(P |x| (((L |x| O) |x| (C |x| N)) |x| R)),2199055,0.041826299973763525,36765,False,False,False
+1.0,duckdb,brass_parts_europe_1995,(P |x| (((L |x| (O |x| C)) |x| N) |x| R)),2277692,0.04900140000972897,36765,False,False,False
+1.0,duckdb,brass_parts_europe_1995,(P |x| ((((L |x| O) |x| C) |x| N) |x| R)),2963788,0.04122860007919371,36765,False,False,False
+1.0,duckdb,brass_parts_europe_1995,((P |x| L) |x| (O |x| (C |x| (N |x| R)))),1314357,0.029887999990023673,36765,False,False,False
+1.0,duckdb,brass_parts_europe_1995,((P |x| L) |x| (O |x| ((C |x| N) |x| R))),1464352,0.030672900029458106,36765,False,False,False
+1.0,duckdb,brass_parts_europe_1995,((P |x| L) |x| ((O |x| C) |x| (N |x| R))),1512994,0.030062399921007454,36765,False,False,False
+1.0,duckdb,brass_parts_europe_1995,((P |x| L) |x| ((O |x| (C |x| N)) |x| R)),1662989,0.03227940003853291,36765,False,False,False
+1.0,duckdb,brass_parts_europe_1995,((P |x| L) |x| (((O |x| C) |x| N) |x| R)),1741626,0.030462800059467554,36765,False,False,False
+1.0,duckdb,brass_parts_europe_1995,((P |x| (L |x| O)) |x| (C |x| (N |x| R))),1164592,0.038995199953205884,36765,False,False,False
+1.0,duckdb,brass_parts_europe_1995,((P |x| (L |x| O)) |x| ((C |x| N) |x| R)),1314587,0.03976509999483824,36765,False,False,False
+1.0,duckdb,brass_parts_europe_1995,(((P |x| L) |x| O) |x| (C |x| (N |x| R))),1451842,0.035308800055645406,36765,False,False,False
+1.0,duckdb,brass_parts_europe_1995,(((P |x| L) |x| O) |x| ((C |x| N) |x| R)),1601837,0.03816899994853884,36765,False,False,False
+1.0,duckdb,brass_parts_europe_1995,((P |x| (L |x| (O |x| C))) |x| (N |x| R)),1363229,0.04333729995414615,36765,False,False,False
+1.0,duckdb,brass_parts_europe_1995,((P |x| ((L |x| O) |x| C)) |x| (N |x| R)),2049325,0.03976650000549853,36765,False,False,False
+1.0,duckdb,brass_parts_europe_1995,(((P |x| L) |x| (O |x| C)) |x| (N |x| R)),1650479,0.03886510001029819,36765,False,False,False
+1.0,duckdb,brass_parts_europe_1995,(((P |x| (L |x| O)) |x| C) |x| (N |x| R)),1317804,0.03941540000960231,36765,False,False,False
+1.0,duckdb,brass_parts_europe_1995,((((P |x| L) |x| O) |x| C) |x| (N |x| R)),1605054,0.04161059996113181,36765,False,False,False
+1.0,duckdb,brass_parts_europe_1995,((P |x| (L |x| (O |x| (C |x| N)))) |x| R),1513224,0.045422499999403954,36765,False,False,False
+1.0,duckdb,brass_parts_europe_1995,((P |x| (L |x| ((O |x| C) |x| N))) |x| R),1591861,0.04297960002440959,36765,False,False,False
+1.0,duckdb,brass_parts_europe_1995,((P |x| ((L |x| O) |x| (C |x| N))) |x| R),2199320,0.05272879998665303,36765,False,False,False
+1.0,duckdb,brass_parts_europe_1995,((P |x| ((L |x| (O |x| C)) |x| N)) |x| R),2277957,0.04523480008356273,36765,False,False,False
+1.0,duckdb,brass_parts_europe_1995,((P |x| (((L |x| O) |x| C) |x| N)) |x| R),2964053,0.04147940000984818,36765,False,False,False
+1.0,duckdb,brass_parts_europe_1995,(((P |x| L) |x| (O |x| (C |x| N))) |x| R),1800474,0.041176300030201674,36765,False,False,False
+1.0,duckdb,brass_parts_europe_1995,(((P |x| L) |x| ((O |x| C) |x| N)) |x| R),1879111,0.039076599990949035,36765,False,False,False
+1.0,duckdb,brass_parts_europe_1995,(((P |x| (L |x| O)) |x| (C |x| N)) |x| R),1467799,0.04055729997344315,36765,False,False,False
+1.0,duckdb,brass_parts_europe_1995,((((P |x| L) |x| O) |x| (C |x| N)) |x| R),1755049,0.03734979999717325,36765,False,False,False
+1.0,duckdb,brass_parts_europe_1995,(((P |x| (L |x| (O |x| C))) |x| N) |x| R),1546436,0.048533800058066845,36765,False,False,False
+1.0,duckdb,brass_parts_europe_1995,(((P |x| ((L |x| O) |x| C)) |x| N) |x| R),2232532,0.04265680001117289,36765,False,False,False
+1.0,duckdb,brass_parts_europe_1995,((((P |x| L) |x| (O |x| C)) |x| N) |x| R),1833686,0.04581110004801303,36765,False,False,False
+1.0,duckdb,brass_parts_europe_1995,((((P |x| (L |x| O)) |x| C) |x| N) |x| R),1501011,0.03965629998128861,36765,False,False,False
+1.0,duckdb,brass_parts_europe_1995,(((((P |x| L) |x| O) |x| C) |x| N) |x| R),1788261,0.038820300018414855,36765,False,False,True
+1.0,duckdb,brass_parts_europe_1995,engine optimizer,,0.03022070007864386,36765,False,False,False
+1.0,duckdb,asia_suppliers_1994,(R |x| (N |x| (S |x| (L |x| O)))),2913830,0.03767730004619807,182183,False,False,False
+1.0,duckdb,asia_suppliers_1994,(R |x| (N |x| ((S |x| L) |x| O))),8004473,0.03786799998488277,182183,False,False,False
+1.0,duckdb,asia_suppliers_1994,(R |x| ((N |x| S) |x| (L |x| O))),2013258,0.03430030005984008,182183,False,False,False
+1.0,duckdb,asia_suppliers_1994,(R |x| ((N |x| (S |x| L)) |x| O)),13095116,0.04353999998420477,182183,False,False,False
+1.0,duckdb,asia_suppliers_1994,(R |x| (((N |x| S) |x| L) |x| O)),7103901,0.045002799946814775,182183,False,False,False
+1.0,duckdb,asia_suppliers_1994,((R |x| N) |x| (S |x| (L |x| O))),2003263,0.036167999962344766,182183,False,False,False
+1.0,duckdb,asia_suppliers_1994,((R |x| N) |x| ((S |x| L) |x| O)),7093906,0.037667700089514256,182183,False,False,False
+1.0,duckdb,asia_suppliers_1994,((R |x| (N |x| S)) |x| (L |x| O)),1104686,0.04002580000087619,182183,False,False,False
+1.0,duckdb,asia_suppliers_1994,(((R |x| N) |x| S) |x| (L |x| O)),1094691,0.035010999999940395,182183,True,True,False
+1.0,duckdb,asia_suppliers_1994,((R |x| (N |x| (S |x| L))) |x| O),13384787,0.03403929993510246,182183,False,False,False
+1.0,duckdb,asia_suppliers_1994,((R |x| ((N |x| S) |x| L)) |x| O),7393572,0.03126339998561889,182183,False,False,False
+1.0,duckdb,asia_suppliers_1994,(((R |x| N) |x| (S |x| L)) |x| O),7383577,0.036016999976709485,182183,False,False,False
+1.0,duckdb,asia_suppliers_1994,(((R |x| (N |x| S)) |x| L) |x| O),1394357,0.037654199986718595,182183,False,False,False
+1.0,duckdb,asia_suppliers_1994,((((R |x| N) |x| S) |x| L) |x| O),1384362,0.030712499981746078,182183,False,False,True
+1.0,duckdb,asia_suppliers_1994,engine optimizer,,0.030518600018694997,182183,False,False,False
+1.0,duckdb,min_cost_supplier,(R |x| (N |x| (S |x| (PS |x| P)))),9562,0.006166400038637221,642,False,False,False
+1.0,duckdb,min_cost_supplier,(R |x| (N |x| ((S |x| PS) |x| P))),806574,0.007242600084282458,642,False,False,False
+1.0,duckdb,min_cost_supplier,(R |x| ((N |x| S) |x| (PS |x| P))),16574,0.005543300067074597,642,False,False,False
+1.0,duckdb,min_cost_supplier,(R |x| ((N |x| (S |x| PS)) |x| P)),1603586,0.006920199957676232,642,False,False,False
+1.0,duckdb,min_cost_supplier,(R |x| (((N |x| S) |x| PS) |x| P)),813586,0.006478800089098513,642,False,False,False
+1.0,duckdb,min_cost_supplier,((R |x| N) |x| (S |x| (PS |x| P))),6579,0.00536189996637404,642,False,False,False
+1.0,duckdb,min_cost_supplier,((R |x| N) |x| ((S |x| PS) |x| P)),803591,0.006192400003783405,642,False,False,False
+1.0,duckdb,min_cost_supplier,((R |x| (N |x| S)) |x| (PS |x| P)),15586,0.005992699996568263,642,False,False,False
+1.0,duckdb,min_cost_supplier,(((R |x| N) |x| S) |x| (PS |x| P)),5591,0.005961199989542365,642,True,True,False
+1.0,duckdb,min_cost_supplier,((R |x| (N |x| (S |x| PS))) |x| P),1760598,0.008772299974225461,642,False,False,False
+1.0,duckdb,min_cost_supplier,((R |x| ((N |x| S) |x| PS)) |x| P),970598,0.0068042000057175756,642,False,False,False
+1.0,duckdb,min_cost_supplier,(((R |x| N) |x| (S |x| PS)) |x| P),960603,0.007259099977090955,642,False,False,False
+1.0,duckdb,min_cost_supplier,(((R |x| (N |x| S)) |x| PS) |x| P),172598,0.006842600065283477,642,False,False,False
+1.0,duckdb,min_cost_supplier,((((R |x| N) |x| S) |x| PS) |x| P),162603,0.007174600032158196,642,False,False,True
+1.0,duckdb,min_cost_supplier,engine optimizer,,0.006158600095659494,642,False,False,False
+1.0,duckdb,returned_items,(N |x| (C |x| (O |x| L))),168795,0.025688800029456615,114705,True,True,False
+1.0,duckdb,returned_items,(N |x| ((C |x| O) |x| L)),169599,0.02850030001718551,114705,False,False,False
+1.0,duckdb,returned_items,((N |x| C) |x| (O |x| L)),262530,0.029020500020124018,114705,False,False,False
+1.0,duckdb,returned_items,((N |x| (C |x| O)) |x| L),170403,0.03024710004683584,114705,False,False,False
+1.0,duckdb,returned_items,(((N |x| C) |x| O) |x| L),263334,0.04325430002063513,114705,False,False,True
+1.0,duckdb,returned_items,engine optimizer,,0.031191400019451976,114705,False,False,False
+1.0,postgres,brass_parts_europe_1995,(P |x| (L |x| (O |x| (C |x| (N |x| R))))),295319,0.48255009995773435,36765,True,True,False
+1.0,postgres,brass_parts_europe_1995,(P |x| (L |x| (O |x| ((C |x| N) |x| R)))),445314,0.5388032000046223,36765,False,False,False
+1.0,postgres,brass_parts_europe_1995,(P |x| (L |x| ((O |x| C) |x| (N |x| R)))),493956,0.528774100006558,36765,False,False,False
+1.0,postgres,brass_parts_europe_1995,(P |x| (L |x| ((O |x| (C |x| N)) |x| R))),643951,0.5259541999548674,36765,False,False,False
+1.0,postgres,brass_parts_europe_1995,(P |x| (L |x| (((O |x| C) |x| N) |x| R))),722588,0.5894211999839172,36765,False,False,False
+1.0,postgres,brass_parts_europe_1995,(P |x| ((L |x| O) |x| (C |x| (N |x| R)))),1164327,0.6061738000717014,36765,False,False,False
+1.0,postgres,brass_parts_europe_1995,(P |x| ((L |x| O) |x| ((C |x| N) |x| R))),1314322,0.6950885999249294,36765,False,False,False
+1.0,postgres,brass_parts_europe_1995,(P |x| ((L |x| (O |x| C)) |x| (N |x| R))),1362964,0.8032819000072777,36765,False,False,False
+1.0,postgres,brass_parts_europe_1995,(P |x| (((L |x| O) |x| C) |x| (N |x| R))),2049060,0.6610488999867812,36765,False,False,False
+1.0,postgres,brass_parts_europe_1995,(P |x| ((L |x| (O |x| (C |x| N))) |x| R)),1512959,0.6459792999085039,36765,False,False,False
+1.0,postgres,brass_parts_europe_1995,(P |x| ((L |x| ((O |x| C) |x| N)) |x| R)),1591596,0.6739994999952614,36765,False,False,False
+1.0,postgres,brass_parts_europe_1995,(P |x| (((L |x| O) |x| (C |x| N)) |x| R)),2199055,0.6861425000242889,36765,False,False,False
+1.0,postgres,brass_parts_europe_1995,(P |x| (((L |x| (O |x| C)) |x| N) |x| R)),2277692,0.6869066999061033,36765,False,False,False
+1.0,postgres,brass_parts_europe_1995,(P |x| ((((L |x| O) |x| C) |x| N) |x| R)),2963788,0.7028235999168828,36765,False,False,False
+1.0,postgres,brass_parts_europe_1995,((P |x| L) |x| (O |x| (C |x| (N |x| R)))),1314357,0.6038639000616968,36765,False,False,False
+1.0,postgres,brass_parts_europe_1995,((P |x| L) |x| (O |x| ((C |x| N) |x| R))),1464352,0.6022752999560907,36765,False,False,False
+1.0,postgres,brass_parts_europe_1995,((P |x| L) |x| ((O |x| C) |x| (N |x| R))),1512994,0.6191254999721423,36765,False,False,False
+1.0,postgres,brass_parts_europe_1995,((P |x| L) |x| ((O |x| (C |x| N)) |x| R)),1662989,0.6283747999696061,36765,False,False,False
+1.0,postgres,brass_parts_europe_1995,((P |x| L) |x| (((O |x| C) |x| N) |x| R)),1741626,0.6326096999691799,36765,False,False,False
+1.0,postgres,brass_parts_europe_1995,((P |x| (L |x| O)) |x| (C |x| (N |x| R))),1164592,0.5895851000677794,36765,False,False,False
+1.0,postgres,brass_parts_europe_1995,((P |x| (L |x| O)) |x| ((C |x| N) |x| R)),1314587,0.5883612000616267,36765,False,False,False
+1.0,postgres,brass_parts_europe_1995,(((P |x| L) |x| O) |x| (C |x| (N |x| R))),1451842,0.6570339999161661,36765,False,False,False
+1.0,postgres,brass_parts_europe_1995,(((P |x| L) |x| O) |x| ((C |x| N) |x| R)),1601837,0.661225099931471,36765,False,False,False
+1.0,postgres,brass_parts_europe_1995,((P |x| (L |x| (O |x| C))) |x| (N |x| R)),1363229,0.6301426999270916,36765,False,False,False
+1.0,postgres,brass_parts_europe_1995,((P |x| ((L |x| O) |x| C)) |x| (N |x| R)),2049325,0.6550358000677079,36765,False,False,False
+1.0,postgres,brass_parts_europe_1995,(((P |x| L) |x| (O |x| C)) |x| (N |x| R)),1650479,0.6768169000279158,36765,False,False,False
+1.0,postgres,brass_parts_europe_1995,(((P |x| (L |x| O)) |x| C) |x| (N |x| R)),1317804,0.6082909000106156,36765,False,False,False
+1.0,postgres,brass_parts_europe_1995,((((P |x| L) |x| O) |x| C) |x| (N |x| R)),1605054,0.6859895000234246,36765,False,False,False
+1.0,postgres,brass_parts_europe_1995,((P |x| (L |x| (O |x| (C |x| N)))) |x| R),1513224,0.6547859000274912,36765,False,False,False
+1.0,postgres,brass_parts_europe_1995,((P |x| (L |x| ((O |x| C) |x| N))) |x| R),1591861,0.6339484000345692,36765,False,False,False
+1.0,postgres,brass_parts_europe_1995,((P |x| ((L |x| O) |x| (C |x| N))) |x| R),2199320,0.6676658999640495,36765,False,False,False
+1.0,postgres,brass_parts_europe_1995,((P |x| ((L |x| (O |x| C)) |x| N)) |x| R),2277957,0.6639895000262186,36765,False,False,False
+1.0,postgres,brass_parts_europe_1995,((P |x| (((L |x| O) |x| C) |x| N)) |x| R),2964053,0.6987811999861151,36765,False,False,False
+1.0,postgres,brass_parts_europe_1995,(((P |x| L) |x| (O |x| (C |x| N))) |x| R),1800474,0.6898308000527322,36765,False,False,False
+1.0,postgres,brass_parts_europe_1995,(((P |x| L) |x| ((O |x| C) |x| N)) |x| R),1879111,0.6860054000280797,36765,False,False,False
+1.0,postgres,brass_parts_europe_1995,(((P |x| (L |x| O)) |x| (C |x| N)) |x| R),1467799,0.616595699917525,36765,False,False,False
+1.0,postgres,brass_parts_europe_1995,((((P |x| L) |x| O) |x| (C |x| N)) |x| R),1755049,0.6846414000028744,36765,False,False,False
+1.0,postgres,brass_parts_europe_1995,(((P |x| (L |x| (O |x| C))) |x| N) |x| R),1546436,0.6296703000552952,36765,False,False,False
+1.0,postgres,brass_parts_europe_1995,(((P |x| ((L |x| O) |x| C)) |x| N) |x| R),2232532,0.6608884000452235,36765,False,False,False
+1.0,postgres,brass_parts_europe_1995,((((P |x| L) |x| (O |x| C)) |x| N) |x| R),1833686,0.6895022999960929,36765,False,False,False
+1.0,postgres,brass_parts_europe_1995,((((P |x| (L |x| O)) |x| C) |x| N) |x| R),1501011,0.6200611999956891,36765,False,False,False
+1.0,postgres,brass_parts_europe_1995,(((((P |x| L) |x| O) |x| C) |x| N) |x| R),1788261,0.6813073999946937,36765,False,False,True
+1.0,postgres,brass_parts_europe_1995,engine optimizer,,0.6871188000077382,36765,False,False,False
+1.0,postgres,asia_suppliers_1994,(R |x| (N |x| (S |x| (L |x| O)))),2913830,0.6031935000792146,182183,False,False,False
+1.0,postgres,asia_suppliers_1994,(R |x| (N |x| ((S |x| L) |x| O))),8004473,0.8537641000002623,182183,False,False,False
+1.0,postgres,asia_suppliers_1994,(R |x| ((N |x| S) |x| (L |x| O))),2013258,0.5683890000218526,182183,False,False,False
+1.0,postgres,asia_suppliers_1994,(R |x| ((N |x| (S |x| L)) |x| O)),13095116,1.0681085000978783,182183,False,False,False
+1.0,postgres,asia_suppliers_1994,(R |x| (((N |x| S) |x| L) |x| O)),7103901,0.8371715000830591,182183,False,False,False
+1.0,postgres,asia_suppliers_1994,((R |x| N) |x| (S |x| (L |x| O))),2003263,0.5652117999270558,182183,False,False,False
+1.0,postgres,asia_suppliers_1994,((R |x| N) |x| ((S |x| L) |x| O)),7093906,0.8076561000198126,182183,False,False,False
+1.0,postgres,asia_suppliers_1994,((R |x| (N |x| S)) |x| (L |x| O)),1104686,0.5345231000101194,182183,False,False,False
+1.0,postgres,asia_suppliers_1994,(((R |x| N) |x| S) |x| (L |x| O)),1094691,0.5085768999997526,182183,True,True,False
+1.0,postgres,asia_suppliers_1994,((R |x| (N |x| (S |x| L))) |x| O),13384787,1.0016549000283703,182183,False,False,False
+1.0,postgres,asia_suppliers_1994,((R |x| ((N |x| S) |x| L)) |x| O),7393572,0.7838946999981999,182183,False,False,False
+1.0,postgres,asia_suppliers_1994,(((R |x| N) |x| (S |x| L)) |x| O),7383577,0.7723774999612942,182183,False,False,False
+1.0,postgres,asia_suppliers_1994,(((R |x| (N |x| S)) |x| L) |x| O),1394357,0.5443877999205142,182183,False,False,False
+1.0,postgres,asia_suppliers_1994,((((R |x| N) |x| S) |x| L) |x| O),1384362,0.5482270000502467,182183,False,False,True
+1.0,postgres,asia_suppliers_1994,engine optimizer,,0.5594573999987915,182183,False,False,False
+1.0,postgres,min_cost_supplier,(R |x| (N |x| (S |x| (PS |x| P)))),9562,0.08223639999050647,642,False,False,False
+1.0,postgres,min_cost_supplier,(R |x| (N |x| ((S |x| PS) |x| P))),806574,0.1298448999878019,642,False,False,False
+1.0,postgres,min_cost_supplier,(R |x| ((N |x| S) |x| (PS |x| P))),16574,0.07710590003989637,642,False,False,False
+1.0,postgres,min_cost_supplier,(R |x| ((N |x| (S |x| PS)) |x| P)),1603586,0.15298789995722473,642,False,False,False
+1.0,postgres,min_cost_supplier,(R |x| (((N |x| S) |x| PS) |x| P)),813586,0.12307500001043081,642,False,False,False
+1.0,postgres,min_cost_supplier,((R |x| N) |x| (S |x| (PS |x| P))),6579,0.07546730001922697,642,False,False,False
+1.0,postgres,min_cost_supplier,((R |x| N) |x| ((S |x| PS) |x| P)),803591,0.11689249996561557,642,False,False,False
+1.0,postgres,min_cost_supplier,((R |x| (N |x| S)) |x| (PS |x| P)),15586,0.07621270010713488,642,False,False,False
+1.0,postgres,min_cost_supplier,(((R |x| N) |x| S) |x| (PS |x| P)),5591,0.07440780010074377,642,True,True,False
+1.0,postgres,min_cost_supplier,((R |x| (N |x| (S |x| PS))) |x| P),1760598,0.16155269998125732,642,False,False,False
+1.0,postgres,min_cost_supplier,((R |x| ((N |x| S) |x| PS)) |x| P),970598,0.12780000001657754,642,False,False,False
+1.0,postgres,min_cost_supplier,(((R |x| N) |x| (S |x| PS)) |x| P),960603,0.13490639999508858,642,False,False,False
+1.0,postgres,min_cost_supplier,(((R |x| (N |x| S)) |x| PS) |x| P),172598,0.08836749999318272,642,False,False,False
+1.0,postgres,min_cost_supplier,((((R |x| N) |x| S) |x| PS) |x| P),162603,0.08689789997879416,642,False,False,True
+1.0,postgres,min_cost_supplier,engine optimizer,,0.0848865999141708,642,False,False,False
+1.0,postgres,returned_items,(N |x| (C |x| (O |x| L))),168795,0.5190581999486312,114705,True,True,False
+1.0,postgres,returned_items,(N |x| ((C |x| O) |x| L)),169599,0.5226457000244409,114705,False,False,False
+1.0,postgres,returned_items,((N |x| C) |x| (O |x| L)),262530,0.5289786999346688,114705,False,False,False
+1.0,postgres,returned_items,((N |x| (C |x| O)) |x| L),170403,0.5106128000188619,114705,False,False,False
+1.0,postgres,returned_items,(((N |x| C) |x| O) |x| L),263334,0.5266763000981882,114705,False,False,True
+1.0,postgres,returned_items,engine optimizer,,0.5292922999942675,114705,False,False,False

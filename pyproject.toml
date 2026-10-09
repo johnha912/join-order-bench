@@ -1,0 +1,38 @@
+[project]
+name = "joinbench"
+version = "2.0.0"
+description = "Does the engine pick the right join order? DP vs heuristics vs DuckDB/Postgres optimizers on TPC-H."
+readme = "README.md"
+requires-python = ">=3.12,<3.14"
+license = "MIT"
+authors = [{ name = "Nguyen Ha" }]
+dependencies = [
+    "duckdb>=1.4",
+    "plotly>=6",
+    "dbt-duckdb>=1.10",
+    "tpchgen-cli>=3.0.0",
+]
+
+[project.optional-dependencies]
+postgres = ["psycopg[binary]>=3.2"]
+
+[project.scripts]
+joinbench = "joinbench.pipeline:main"
+
+[dependency-groups]
+dev = ["pytest>=8", "ruff>=0.6"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.ruff]
+line-length = 110
+# v1 code, kept verbatim
+extend-exclude = ["src/joinbench/dp.py", "src/joinbench/cost_model.py", "src/joinbench/heuristics.py"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

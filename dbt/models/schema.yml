@@ -1,0 +1,101 @@
+# The cost model assumes every foreign-key edge is clean: each child row matches
+# exactly one parent row, so an edge's selectivity is 1 / |parent|. These tests
+# are that assumption, checked on the data before any benchmark runs.
+
+version: 2
+
+sources:
+  - name: tpch_raw
+    meta:
+      external_location: "read_parquet('{{ var('raw_dir') }}/{name}.parquet')"
+    tables:
+      - name: region
+      - name: nation
+      - name: customer
+      - name: orders
+      - name: lineitem
+      - name: part
+      - name: supplier
+      - name: partsupp
+
+models:
+  - name: region
+    columns:
+      - name: r_regionkey
+        data_tests: [unique, not_null]
+
+  - name: nation
+    columns:
+      - name: n_nationkey
+        data_tests: [unique, not_null]
+      - name: n_regionkey
+        data_tests:
+          - not_null
+          - relationships:
+              arguments: {to: ref('region'), field: r_regionkey}
+
+  - name: customer
+    columns:
+      - name: c_custkey
+        data_tests: [unique, not_null]
+      - name: c_nationkey
+        data_tests:
+          - not_null
+          - relationships:
+              arguments: {to: ref('nation'), field: n_nationkey}
+
+  - name: orders
+    columns:
+      - name: o_orderkey
+        data_tests: [unique, not_null]
+      - name: o_custkey
+        data_tests:
+          - not_null
+          - relationships:
+              arguments: {to: ref('customer'), field: c_custkey}
+
+  - name: part
+    columns:
+      - name: p_partkey
+        data_tests: [unique, not_null]
+
+  - name: supplier
+    columns:
+      - name: s_suppkey
+        data_tests: [unique, not_null]
+      - name: s_nationkey
+        data_tests:
+          - not_null
+          - relationships:
+              arguments: {to: ref('nation'), field: n_nationkey}
+
+  - name: partsupp
+    columns:
+      - name: ps_partkey
+        data_tests:
+          - not_null
+          - relationships:
+              arguments: {to: ref('part'), field: p_partkey}
+      - name: ps_suppkey
+        data_tests:
+          - not_null
+          - relationships:
+              arguments: {to: ref('supplier'), field: s_suppkey}
+
+  - name: lineitem
+    columns:
+      - name: l_orderkey
+        data_tests:
+          - not_null
+          - relationships:
+              arguments: {to: ref('orders'), field: o_orderkey}
+      - name: l_partkey
+        data_tests:
+          - not_null
+          - relationships:
+              arguments: {to: ref('part'), field: p_partkey}
+      - name: l_suppkey
+        data_tests:
+          - not_null
+          - relationships:
+              arguments: {to: ref('supplier'), field: s_suppkey}

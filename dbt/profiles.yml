@@ -1,0 +1,6 @@
+joinbench:
+  target: local
+  outputs:
+    local:
+      type: duckdb
+      path: "{{ env_var('JOINBENCH_DB') }}"

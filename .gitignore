@@ -1,0 +1,11 @@
+__pycache__/
+.venv/
+.pytest_cache/
+.ruff_cache/
+data/
+dbt/target/
+dbt/logs/
+dbt/dbt_packages/
+logs/
+*.pdf
+dbt/.user.yml

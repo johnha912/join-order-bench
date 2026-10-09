@@ -1,0 +1,8 @@
+name: joinbench
+version: "2.0.0"
+profile: joinbench
+model-paths: ["models"]
+
+models:
+  joinbench:
+    +materialized: table

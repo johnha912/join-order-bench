@@ -3,6 +3,10 @@
 Static on purpose: it opens from disk and hosts on GitHub Pages, no server.
 Gray = any join order; blue / orange / aqua = the DP pick, the engine's own
 optimizer, and plain left-to-right. Each also has its own marker shape.
+
+Every chart is drawn twice: a desktop version and a phone version (one column, wrapped
+labels, no drag-to-zoom so a swipe scrolls the page, no toolbar). CSS shows the one that
+fits the screen.
 """
 
 import csv
@@ -90,7 +94,21 @@ table.querySelectorAll("th button").forEach((b, i) => b.addEventListener("click"
 </script>"""
 
 
-def style(fig, height):
+def wrap(name, width=10):
+    """Break a snake_case chain name after underscores into lines of at most ~width characters,
+    so four category labels fit side by side on a phone."""
+    lines, line = [], ""
+    for part in name.split("_"):
+        piece = part if not line else "_" + part
+        if line and len(line) + len(piece) > width:
+            lines.append(line + "_")
+            line = part
+        else:
+            line += piece
+    return "<br>".join(lines + [line])
+
+
+def style(fig, height, phone=False):
     fig.update_layout(
         height=height, margin=dict(l=60, r=20, t=50, b=50),
         font=dict(family="system-ui, Segoe UI, sans-serif"),
@@ -99,10 +117,20 @@ def style(fig, height):
     )
     fig.update_xaxes(gridcolor=GRID, linecolor=GRAY, zeroline=False)
     fig.update_yaxes(gridcolor=GRID, linecolor=GRAY, zeroline=False)
+    if phone:
+        # Legend in its own band at the top, tighter margins, and fixed axes: on a touch screen a
+        # drag should scroll the page, not zoom the chart. Tapping a point still shows its value.
+        fig.update_layout(
+            margin=dict(l=52, r=8, t=70, b=40), font_size=12, dragmode=False,
+            legend=dict(orientation="h", x=0, xanchor="left", y=1, yanchor="top", yref="container",
+                        font_size=12),
+        )
+        fig.update_xaxes(fixedrange=True)
+        fig.update_yaxes(fixedrange=True)
     return fig
 
 
-def spread_figure(plans):
+def spread_figure(plans, phone=False):
     """Every join order of every chain, one dot each, highlighted picks on top."""
     engines = list(dict.fromkeys(r["engine"] for r in plans))
     fig = make_subplots(rows=len(engines), cols=1, shared_xaxes=True, vertical_spacing=0.08,
@@ -127,11 +155,21 @@ def spread_figure(plans):
                 hovertemplate=f"{name}<br>%{{text}}<br>%{{y:,.1f}} ms<extra></extra>",
             ), row=row, col=1)
         fig.update_yaxes(type="log", title_text="ms (log)", row=row, col=1)
+    if phone:
+        chains = list(dict.fromkeys(r["chain"] for r in plans))
+        fig.update_xaxes(tickvals=chains, ticktext=[wrap(c) for c in chains], tickangle=0, tickfont_size=10)
+        fig.update_traces(jitter=0.8, marker_size=6, selector=dict(type="box"))
+        fig.update_traces(marker_size=12, selector=dict(type="scatter"))
+        style(fig, 340 * len(engines) + 90, phone=True)
+        return fig.update_layout(margin_t=120, margin_b=72)
     return style(fig, 380 * len(engines))
 
 
-def model_figure(plans):
-    """Does a lower model cost actually mean a faster query? One panel per chain x engine."""
+def model_figure(plans, phone=False):
+    """Does a lower model cost actually mean a faster query? One panel per chain x engine.
+
+    Desktop: engines as rows, chains as columns. Phone: the same panels stacked in one column.
+    """
     engines = list(dict.fromkeys(r["engine"] for r in plans))
     chains = list(dict.fromkeys(r["chain"] for r in plans))
     cells = {(e, c): [r for r in plans if r["engine"] == e and r["chain"] == c
@@ -143,22 +181,33 @@ def model_figure(plans):
             rho = statistics.correlation([r["model_cost"] for r in rs], [r["seconds"] for r in rs],
                                          method="ranked")
             titles.append(f"{e} · {c}<br>Spearman ρ = {rho:.2f}")
-    fig = make_subplots(rows=len(engines), cols=len(chains), subplot_titles=titles,
-                        horizontal_spacing=0.05, vertical_spacing=0.18)
-    for row, e in enumerate(engines, 1):
-        for col, c in enumerate(chains, 1):
-            rs = cells[e, c]
-            layers = ((False, "Any join order", GRAY, 8), (True, "DP pick", PICKS[0][2], 14))
-            for flag, name, color, size in layers:
-                pts = [r for r in rs if r["is_dp"] == flag]
-                fig.add_trace(go.Scatter(
-                    x=[r["model_cost"] for r in pts], y=[r["seconds"] * 1000 for r in pts],
-                    text=[r["plan"] for r in pts], mode="markers", name=name, legendgroup=name,
-                    showlegend=row == col == 1,
-                    marker=dict(color=color, size=size, symbol="star" if flag else "circle",
-                                line=dict(color="white", width=2 if flag else 0)),
-                    hovertemplate="%{text}<br>model cost %{x:,.0f}<br>%{y:,.1f} ms<extra></extra>",
-                ), row=row, col=col)
+    n = len(engines) * len(chains)
+    if phone:
+        fig = make_subplots(rows=n, cols=1, subplot_titles=titles, vertical_spacing=0.32 / n)
+    else:
+        fig = make_subplots(rows=len(engines), cols=len(chains), subplot_titles=titles,
+                            horizontal_spacing=0.05, vertical_spacing=0.18)
+    for i, (e, c) in enumerate((e, c) for e in engines for c in chains):
+        row, col = (i + 1, 1) if phone else (i // len(chains) + 1, i % len(chains) + 1)
+        rs = cells[e, c]
+        layers = ((False, "Any join order", GRAY, 8), (True, "DP pick", PICKS[0][2], 14))
+        for flag, name, color, size in layers:
+            pts = [r for r in rs if r["is_dp"] == flag]
+            fig.add_trace(go.Scatter(
+                x=[r["model_cost"] for r in pts], y=[r["seconds"] * 1000 for r in pts],
+                text=[r["plan"] for r in pts], mode="markers", name=name, legendgroup=name,
+                showlegend=i == 0,
+                marker=dict(color=color, size=size, symbol="star" if flag else "circle",
+                            line=dict(color="white", width=2 if flag else 0)),
+                hovertemplate="%{text}<br>model cost %{x:,.0f}<br>%{y:,.1f} ms<extra></extra>",
+            ), row=row, col=col)
+    if phone:
+        fig.update_xaxes(type="log", nticks=5)
+        fig.update_xaxes(title_text="model cost (rows, log)", row=n, col=1)
+        fig.update_yaxes(type="log", title_text="ms (log)", nticks=5)
+        fig.update_annotations(font_size=12)
+        style(fig, 250 * n + 140, phone=True)
+        return fig.update_layout(margin_t=100, margin_b=56)
     fig.update_xaxes(type="log", title_text="model cost (rows, log)")
     fig.update_yaxes(type="log")
     fig.update_yaxes(title_text="ms (log)", col=1)
@@ -168,7 +217,7 @@ def model_figure(plans):
     return fig
 
 
-def cardinality_figure(cards):
+def cardinality_figure(cards, phone=False):
     """The cost model's row estimate for every sub-chain, against the true count."""
     xs = [max(r["actual"], 1) for r in cards]
     ys = [max(r["estimated"], 1) for r in cards]
@@ -185,6 +234,8 @@ def cardinality_figure(cards):
     ])
     fig.update_xaxes(type="log", title_text="actual rows (log)")
     fig.update_yaxes(type="log", title_text="estimated rows (log)")
+    if phone:
+        return style(fig, 420, phone=True)
     return style(fig, 460)
 
 
@@ -214,6 +265,10 @@ th[aria-sort="descending"] button::after {{ content:" ▼"; color:var(--ink); }}
 #summary-filters select {{ font:inherit; padding:6px 8px; min-height:36px; border:1px solid var(--line);
   border-radius:8px; background:#fff; color:var(--ink); }}
 a {{ color:#2a78d6; }}
+/* Each chart ships a desktop and a phone version; show the one that fits. */
+@media (max-width:640px) {{ .chart-desktop {{ display:none; }}
+  main {{ padding:24px 12px; }} section {{ padding:12px 8px; }} }}
+@media (min-width:641px) {{ .chart-phone {{ display:none; }} }}
 </style></head><body><main>
 <h1>Join Order Bench</h1>
 <p>v2 by Nguyen Ha, solo ·
@@ -249,9 +304,15 @@ filters. Points off the diagonal are where that assumption breaks.</p>
 def build(plans_csv, cards_csv, out):
     plans, cards = load(plans_csv), load(cards_csv)
     config = {"responsive": True, "displaylogo": False}
-    figs = [spread_figure(plans), model_figure(plans), cardinality_figure(cards)]
-    parts = [f.to_html(full_html=False, include_plotlyjs="cdn" if i == 0 else False, config=config)
-             for i, f in enumerate(figs)]
+    phone_config = {**config, "displayModeBar": False, "scrollZoom": False}
+    makers = [lambda p: spread_figure(plans, p), lambda p: model_figure(plans, p),
+              lambda p: cardinality_figure(cards, p)]
+    parts = []
+    for i, make in enumerate(makers):
+        desktop = make(False).to_html(full_html=False, include_plotlyjs="cdn" if i == 0 else False,
+                                      config=config)
+        phone = make(True).to_html(full_html=False, include_plotlyjs=False, config=phone_config)
+        parts.append(f'<div class="chart-desktop">{desktop}</div><div class="chart-phone">{phone}</div>')
     engines = " and ".join(dict.fromkeys(r["engine"] for r in plans))
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(PAGE.format(sf=f"SF {float(plans[0]['sf']):g}", engines=engines, table=kpi_table(plans),

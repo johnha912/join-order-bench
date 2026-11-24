@@ -262,11 +262,12 @@ th button::after {{ content:" ↕"; color:#c3c2b7; }}
 th[aria-sort="ascending"] button::after {{ content:" ▲"; color:var(--ink); }}
 th[aria-sort="descending"] button::after {{ content:" ▼"; color:var(--ink); }}
 #summary-filters {{ display:flex; flex-wrap:wrap; gap:16px; margin-bottom:12px; font-size:14px; }}
-#summary-filters select {{ font:inherit; padding:6px 8px; min-height:36px; border:1px solid var(--line);
+#summary-filters select {{ font:inherit; padding:6px 8px; min-height:44px; border:1px solid var(--line);
   border-radius:8px; background:#fff; color:var(--ink); }}
 a {{ color:#2a78d6; }}
 /* Each chart ships a desktop and a phone version; show the one that fits. */
 @media (max-width:640px) {{ .chart-desktop {{ display:none; }}
+  th button {{ display:inline-block; padding:12px 0; }}
   main {{ padding:24px 12px; }} section {{ padding:12px 8px; }} }}
 @media (min-width:641px) {{ .chart-phone {{ display:none; }} }}
 </style></head><body><main>
